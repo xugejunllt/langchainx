@@ -46,7 +46,7 @@ def remove_last_char(filename, symbol):
     return new_filename
 
 
-# 递归函数，用于找到最内层的文件并重命名
+# 找到最深层次的
 def rename_deepest_files(directory, prefix):
     count = 0
     for root, dirs, files in os.walk(directory, topdown=False):
