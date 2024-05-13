@@ -26,6 +26,7 @@ prompt_template = PromptTemplate(
     input_variables=[],
     partial_variables={"format_instructions": output_parser.get_format_instructions()},
 )
+print(prompt_template)
 llm = OpenAI()
 chain = prompt_template | OpenAI()
 output = chain.invoke({})

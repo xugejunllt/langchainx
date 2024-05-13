@@ -13,5 +13,5 @@ def compress_folder(folder_path, zip_name):
 
 # 使用示例
 folder_to_compress = 'output'
-zip_file_name = 'output.zip.z'
+zip_file_name = 'output.zip'
 compress_folder(folder_to_compress, zip_file_name)
