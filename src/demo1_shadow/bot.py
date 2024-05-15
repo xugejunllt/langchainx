@@ -23,7 +23,7 @@ Answer:
 """
 prompt_template = PromptTemplate.from_template(prompt_template_str)
 
-llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
+llm = ChatOpenAI(model_name="gpt-4o", temperature=0)
 
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)

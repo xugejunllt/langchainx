@@ -1,5 +1,4 @@
 ﻿import cv2
-import numpyDemo as np
 from PIL import ImageFont
 
 # 读取医学图像，这里以普通图片为例
