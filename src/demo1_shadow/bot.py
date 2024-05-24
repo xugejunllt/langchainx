@@ -1,10 +1,11 @@
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain_community.vectorstores import Chroma
-from langchain_openai import ChatOpenAI,OpenAIEmbeddings
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain.prompts.prompt import PromptTemplate
 
 import os
+
 os.environ['OPENAI_API_KEY'] = 'sk-yAiO2z9iZxtcXS0QueiDgfqaUqIIjkkmSLFxZXn7mkD2Zimh'
 os.environ['OPENAI_API_BASE'] = 'https://api.chatanywhere.com.cn/v1'
 from fastapi import FastAPI
@@ -25,19 +26,20 @@ prompt_template = PromptTemplate.from_template(prompt_template_str)
 
 llm = ChatOpenAI(model_name="gpt-4o", temperature=0)
 
+
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
 
 rag_chain = (
-    {"context": retriever | format_docs, "question": RunnablePassthrough()}
-    | prompt_template
-    | llm
-    | StrOutputParser()
+        {"context": retriever | format_docs, "question": RunnablePassthrough()}
+        | prompt_template
+        | llm
+        | StrOutputParser()
 )
 app = FastAPI(
-  title="消费者权益智能助手",
-  version="1.0",
+    title="消费者权益智能助手",
+    version="1.0",
 )
 # 3. Adding chain route
 add_routes(
@@ -47,4 +49,5 @@ add_routes(
 )
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="localhost", port=8000)

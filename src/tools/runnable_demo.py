@@ -17,7 +17,7 @@ def add(x, y):
 
 
 add_runner = Runnable(add)
-print(add_runner(1, 2))  # 3
+print(add_runner(1, 2))  # 3  add_runner(1,2) == add(1,2)
 
 
 def double(x):
