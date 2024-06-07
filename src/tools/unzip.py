@@ -12,8 +12,9 @@ def unzip_file(zip_path, extract_path):
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
         for file_info in zip_ref.infolist():
             # 解决中文文件名乱码问题
-            file_info.filename = file_info.filename.encode('cp437').decode('gbk')
-            # file_info.filename = file_info.filename.encode('utf-8').decode('utf-8')
+            # file_info.filename = file_info.filename.encode('cp437').decode('gbk')
+            file_info.filename = file_info.filename.encode('utf-8').decode('utf-8')
+            # file_info.filename = file_info.filename.encode('cp437').decode('utf-8')
             zip_ref.extract(file_info, extract_path)
     print(f"Extracted: {zip_path}")
 

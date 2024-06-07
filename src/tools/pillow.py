@@ -1,7 +1,7 @@
 ﻿from PIL import Image
 
 # 图片文件的路径
-image_path = '4BECD150063XMGRX00L-tmall.jpg'
+image_path = 'o2.jpg'
 
 # 使用Pillow打开图片
 with Image.open(image_path) as img:

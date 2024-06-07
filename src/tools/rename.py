@@ -7,6 +7,7 @@ import zipfile
 # 指定解压后文件存放的目录
 extract_path = 'output'
 
+
 # 要添加到文件名前的固定值
 # prefix = 'PW_0_'
 
@@ -65,6 +66,7 @@ def rename_deepest_files(directory, prefix):
                     print(f'Renamed "{file_path}" to "{new_file_path}" and to "{new_file_path_removed}"')
     print(f'一共处理了"{count}"个文件')
 
+
 # 对解压目录中的文件进行重命名
 # rename_files_in_folder(extract_path, prefix)
 # rename_deepest_files(extract_path, "")
@@ -101,5 +103,22 @@ def rename_underscores_files(directory):
     print(f'一共处理了"{count}"个文件')
 
 
-rename_underscores_files(extract_path)
+def rename_prefix_files(directory, prefix):
+    count = 0
+    for root, dirs, files in os.walk(directory, topdown=False):
+        if files:  # 确保当前目录不是空的
+            # 由于os.walk默认按目录深度排序，topdown=False将从最深层的目录开始遍历
+            for file in files:
+                file_path = os.path.join(root, file)
+                if os.path.isfile(file_path):  # 确保是一个文件
+                    count += 1
+                    new_filename = f"{prefix}{file}"
+                    new_file_path = os.path.join(root, new_filename)
+                    os.rename(file_path, new_file_path)
+                    print(f'Renamed "{file_path}" to "{new_file_path}"')
+    print(f'一共处理了"{count}"个文件')
+
+
+# rename_underscores_files(extract_path)
+rename_prefix_files(extract_path, "PW-0-")
 print('文件重命名完成。')

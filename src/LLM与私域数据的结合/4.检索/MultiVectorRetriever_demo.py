@@ -21,7 +21,8 @@ store = InMemoryByteStore()
 vectorstore = Chroma(embedding_function=OpenAIEmbeddings())
 # 指定子文档metadata 中标识对应大文档的 key
 id_key = "doc_id"
-
+# vectorstore：嵌入文档和从向量数据库中查询文档所使用的向量存储对象。
+# BaseStore
 retriever = MultiVectorRetriever(
     vectorstore=vectorstore,
     byte_store=store,
@@ -41,7 +42,7 @@ for i, doc in enumerate(docs):
     sub_docs.extend(_sub_docs)
 # 子文档嵌入存储到向量数据库中
 retriever.vectorstore.add_documents(sub_docs)
-# 原始文档存储到 docstore 中
+# 原始文档存储到 docstore 中，docstore就是BaseStore
 retriever.docstore.mset(list(zip(doc_ids, docs)))
-
+# 先使用vectorstore查询获取子文档块列表，然后，通过子文档块中元信息的id_key对应的 value，在docstore找出对应的大文档。
 print(retriever.vectorstore.similarity_search("LangServe"))
